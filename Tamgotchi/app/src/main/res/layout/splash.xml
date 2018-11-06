@@ -13,16 +13,18 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <EditText
             android:id="@+id/editText4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="46dp"
             android:layout_marginStart="151dp"
             android:layout_marginTop="25dp"
+            android:layout_marginEnd="46dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="number"
@@ -35,16 +37,17 @@
             android:id="@+id/editText3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:layout_marginEnd="53dp"
             android:layout_marginStart="144dp"
             android:layout_marginTop="250dp"
+            android:layout_marginEnd="53dp"
+            android:layout_marginBottom="25dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name"
             app:layout_constraintBottom_toTopOf="@+id/editText4"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
