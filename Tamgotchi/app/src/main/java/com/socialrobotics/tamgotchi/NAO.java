@@ -56,24 +56,26 @@ public abstract class NAO extends AppCompatActivity {
 
     public void energy(){
         int count = getHappinessMeterLevel();
-        if(getChattingBool().equalsIgnoreCase("True") || getPlayingBool().equalsIgnoreCase("True")){
-            count = count-5;
+        if(count >= 0) {
+            if (getChattingBool().equalsIgnoreCase("True") || getPlayingBool().equalsIgnoreCase("True")) {
+                count = count - 5;
+            } else {
+                count = Integer.parseInt(getBatteryValue());
+            }
+            setEnergyMeterLevel(count);
         }
-        else{
-            count = Integer.parseInt(getBatteryValue());
-        }
-        setEnergyMeterLevel(count);
     }
 
     public void happiness() {
         int count = getHappinessMeterLevel();
-        if(getChattingBool().equalsIgnoreCase("True") || getPlayingBool().equalsIgnoreCase("True")){
-                count = count+5;
+        if(count >= 0) {
+            if (getChattingBool().equalsIgnoreCase("True") || getPlayingBool().equalsIgnoreCase("True")) {
+                count = count + 5;
+            } else {
+                count = count - 5;
+            }
+            setHappinessMeterLevel(count);
         }
-        else{
-                count = count-5;
-        }
-        setHappinessMeterLevel(count);
     }
 
     public void food(){
@@ -82,13 +84,14 @@ public abstract class NAO extends AppCompatActivity {
 
     public void health(){
         int count = getHappinessMeterLevel();
-        if(getPlayingBool().equalsIgnoreCase("True")){
-                count = count+5;
-        }
-        else if (getChattingBool().equalsIgnoreCase("True")){
-                count = count-5;
-        }
+        if(count >= 0) {
+            if (getPlayingBool().equalsIgnoreCase("True")) {
+                count = count + 5;
+            } else if (getChattingBool().equalsIgnoreCase("True")) {
+                count = count - 5;
+            }
         setHealthMeterLevel(count);
+        }
     }
 
     public void adapter(){
@@ -98,26 +101,43 @@ public abstract class NAO extends AppCompatActivity {
         food();
     }
 
+
+    public void reset(int count){
+        setEnergyMeterLevel(count);
+        setFoodMeterLevel(count);
+        setHappinessMeterLevel(count);
+        setHealthMeterLevel(count);
+    }
+
     public void updateDatabase(){
-        if(getHappinessMeterLevel()<50 )
+        if(getHappinessMeterLevel()<25 )
             setHappinessFactor("VERYSAD");
-        else if(getHappinessMeterLevel()<75 && getHappinessMeterLevel()>50)
+        else if(getHappinessMeterLevel()<50 && getHappinessMeterLevel()>25)
             setHappinessFactor("SAD");
+        else if(getHappinessMeterLevel()>50)
+            setHappinessFactor("NORMAL");
 
         if(getHealthMeterLevel()<25 )
             setHealthFactor("SICK");
         else if(getHealthMeterLevel()<50 && getHealthMeterLevel()>25)
             setHealthFactor("UNHEALTHY");
+        else if(getHealthMeterLevel()>50)
+            setHealthFactor("NORMAL");
 
         if(getFoodMeterLevel()<25 )
             setFoodFactor("VERYHUNGRY");
         else if(getFoodMeterLevel()<50 && getFoodMeterLevel()>25)
             setFoodFactor("HUNGRY");
+        else if(getFoodMeterLevel()>50)
+            setFoodFactor("NORMAL");
 
         if(getEnergyMeterLevel()<5 )
             setEnergyFactor("SLEEP");
         else if(getEnergyMeterLevel()<25 && getEnergyMeterLevel()>5)
             setEnergyFactor("UNHEALTHY");
+        else if(getEnergyMeterLevel()>25)
+            setEnergyFactor("NORMAL");
+
     }
 
     public int getEnergyMeterLevel() {

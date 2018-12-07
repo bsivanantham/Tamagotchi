@@ -73,31 +73,25 @@
             android:layout_marginBottom="330dp"
             app:arc_bottom_text="Happiness"
             app:arc_progress="40"
-            app:layout_constraintBottom_toTopOf="@+id/fab"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/energyMeter"
             app:layout_constraintTop_toTopOf="parent"
             custom:ignore="MissingConstraints" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:layout_marginStart="313dp"
-            android:layout_marginTop="213dp"
-            android:layout_marginEnd="328dp"
-            android:layout_marginBottom="119dp"
-            android:src="@drawable/baseline_feedback_white_18dp"
-            app:backgroundTint="@color/accent_alpha26"
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="75dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="284dp"
+            android:layout_marginTop="340dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="108dp"
+            android:text="Reset"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.01"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/healthMeter"
-            app:layout_constraintVertical_bias="1.0"
-            custom:ignore="MissingConstraints" />
+            app:layout_constraintTop_toBottomOf="@+id/happinessMeter" />
+
 
     </android.support.constraint.ConstraintLayout>
 
