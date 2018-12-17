@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 public abstract class NAO extends AppCompatActivity {
     private String TAG = this.getClass().getName();
@@ -54,60 +55,79 @@ public abstract class NAO extends AppCompatActivity {
     }
 
 
-    public void energy(){
-        int count = getHappinessMeterLevel();
-        if(count >= 0) {
-            if (getChattingBool().equalsIgnoreCase("True") || getPlayingBool().equalsIgnoreCase("True")) {
-                count = count - 5;
-            } else {
-                count = Integer.parseInt(getBatteryValue());
+    public void energy(TextView textView){
+        textView.setText(new StringBuilder().append("energy:").append("Energy:").append(getEnergyMeterLevel()).append("foodMeter:").append(getFoodMeterLevel()).append("happinessMeter:").append(getHappinessMeterLevel()).append("healthMeter:").append(getHealthMeterLevel()).toString());
+        int count = getEnergyMeterLevel();
+        if(count > 0 && count < 100) {
+            if ((getChattingBool().equalsIgnoreCase("True")) || (getPlayingBool().equalsIgnoreCase("True"))) {
+                count = count - 2;
+            } else if ((getPlayingBool().equalsIgnoreCase("False"))) {
+                count = count ;
+            }else {
+                count = count - 2;
             }
-            setEnergyMeterLevel(count);
         }
+        else if(count == 100){
+            count = count - 2;
+        }
+        setEnergyMeterLevel(count);
     }
 
-    public void happiness() {
+    public void happiness(TextView textView) {
+        //textView.setText(new StringBuilder().append("happiness:").append("Energy:").append(getEnergyMeterLevel()).append("foodMeter:").append(getFoodMeterLevel()).append("happinessMeter:").append(getHappinessMeterLevel()).append("healthMeter:").append(getHealthMeterLevel()).toString());
+
         int count = getHappinessMeterLevel();
-        if(count >= 0) {
-            if (getChattingBool().equalsIgnoreCase("True") || getPlayingBool().equalsIgnoreCase("True")) {
-                count = count + 5;
+        if(count > 0 && count < 100) {
+            if ((getChattingBool().equalsIgnoreCase("True")) || (getPlayingBool().equalsIgnoreCase("True"))) {
+                count = count + 2;
             } else {
-                count = count - 5;
+                count = count - 2;
             }
-            setHappinessMeterLevel(count);
         }
+        else if(count == 100){
+            count = count - 2;
+        }
+        setHappinessMeterLevel(count);
     }
 
-    public void food(){
+    public void food(TextView textView){
+
+        //textView.setText(new StringBuilder().append("food:").append("Energy:").append(getEnergyMeterLevel()).append("foodMeter:").append(getFoodMeterLevel()).append("happinessMeter:").append(getHappinessMeterLevel()).append("healthMeter:").append(getHealthMeterLevel()).toString());
         setFoodMeterLevel(Integer.parseInt(getBatteryValue()));
     }
 
-    public void health(){
-        int count = getHappinessMeterLevel();
-        if(count >= 0) {
+    public void health(TextView textView){
+        textView.setText(new StringBuilder().append("health:").append("Energy:").append(getEnergyMeterLevel()).append("foodMeter:").append(getFoodMeterLevel()).append("happinessMeter:").append(getHappinessMeterLevel()).append("healthMeter:").append(getHealthMeterLevel()).toString());
+        int count = getHealthMeterLevel();
+        if(count > 0 && count < 100) {
             if (getPlayingBool().equalsIgnoreCase("True")) {
-                count = count + 5;
+                count = count + 2;
             } else if (getChattingBool().equalsIgnoreCase("True")) {
-                count = count - 5;
+                count = count - 2;
+            }else {
+                count = count - 2;
             }
-        setHealthMeterLevel(count);
         }
+        else if(count == 100){
+            count = count - 2;
+        }
+        setHealthMeterLevel(count);
     }
 
-    public void adapter(){
-        energy();
-        happiness();
-        health();
-        food();
+    public void adapter(TextView textView){
+        energy(textView);
+        happiness(textView);
+        health(textView);
+        food(textView);
     }
 
 
-    public void reset(int count){
+/*    public void reset(int count){
         setEnergyMeterLevel(count);
         setFoodMeterLevel(count);
         setHappinessMeterLevel(count);
         setHealthMeterLevel(count);
-    }
+    }*/
 
     public void updateDatabase(){
         if(getHappinessMeterLevel()<25 )
